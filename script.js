@@ -1,35 +1,67 @@
-// Initialize word categories
-const wordBank = {
-  character: ['The cat', 'A pirate', 'An astronaut', 'The robot', 'A dragon'],
-  action: ['jumped over', 'flew past', 'ran toward', 'slept on', 'danced with'],
-  place: ['the moon', 'a haunted house', 'the castle', 'the playground', 'a volcano']
+const selections = {
+  subject: null,
+  verb: null,
+  adjective: null,
+  object: null,
+  location: null,
 };
 
-// Initialize story array
-let story = [];
+const columns = document.querySelectorAll('.column');
+const sentenceEl = document.getElementById('sentence');
+const speakBtn = document.getElementById('speakBtn');
 
-// Add random word from selected category
-function addToStory(type) {
-  const words = wordBank[type];
-  const randomWord = words[Math.floor(Math.random() * words.length)];
-  story.push(randomWord);
-  updateStory();
+columns.forEach(column => {
+  const colName = column.dataset.column;
+  const buttons = column.querySelectorAll('button');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      buttons.forEach(btn => btn.classList.remove('selected'));
+
+     
+      button.classList.add('selected');
+
+  
+      selections[colName] = button.textContent;
+
+      updateSentence();
+    });
+  });
+});
+
+function updateSentence() {
+  const { subject, verb, adjective, object, location } = selections;
+
+  if (subject && verb && adjective && object && location) {
+    sentenceEl.textContent = `${subject} ${verb} ${adjective} ${object} ${location}.`;
+  } else {
+    // showing blankspace as a placeholder for missing selections
+    const display = 
+      `${subject || '___'} ${verb || '___'} ${adjective || '___'} ${object || '___'} ${location || '___'}.`;
+    sentenceEl.textContent = display;
+  }
 }
 
-// Update story text in UI
-function updateStory() {
-  document.getElementById('story-text').innerText = story.join(' ');
-}
+document.getElementById('resetBtn').addEventListener('click', () => {
+  // Clear selections
+  for (const key in selections) {
+    selections[key] = null;
+  }
+ 
+  columns.forEach(column => {
+    column.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+  });
+  updateSentence();
+});
 
-// Clear the current story
-function clearStory() {
-  story = [];
-  updateStory();
-}
+// Speak button;- Not sure if this will work or not
+speakBtn.addEventListener('click', () => {
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(sentenceEl.textContent);
+    window.speechSynthesis.speak(utterance);
+  } else {
+    alert("Sorry, your browser doesn't support speech synthesis.");
+  }
+});
 
-// Speak the story using Web Speech API
-function speakStory() {
-  if (story.length === 0) return;
-  const utterance = new SpeechSynthesisUtterance(story.join(' '));
-  window.speechSynthesis.speak(utterance);
-}
+updateSentence();
