@@ -1,33 +1,141 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f9f5e9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
+  background: #f9f9f9;
+  text-align: center;
+  color: #333;
 }
 
-#toy-wheel {
-  margin-top: 20px;
+h1 {
+  margin-bottom: 30px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 130px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.column h2 {
+  margin-bottom: 12px;
 }
 
 button {
-  margin: 10px;
-  padding: 15px 20px;
-  font-size: 16px;
-  border-radius: 50%;
+  margin: 6px 0;
+  padding: 8px 12px;
   border: none;
-  background-color: #f2c94c;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
   transition: background-color 0.3s ease;
+  width: 120px;
 }
 
 button:hover {
-  background-color: #f2994a;
+  filter: brightness(90%);
 }
 
-#story-output {
-  margin-top: 30px;
-  background-color: #fff3cd;
-  padding: 20px;
-  border-radius: 8px;
-  display: inline-block;
+button.selected {
+  box-shadow: 0 0 8px 3px #333;
+  font-weight: 700;
 }
+
+/* Color coding for each column */
+
+.purple {
+  background-color: #d3c2e8;
+}
+
+.purple button {
+  background-color: #7c4dff;
+  color: white;
+}
+
+.blue {
+  background-color: #c2d7e8;
+}
+
+.blue button {
+  background-color: #2196f3;
+  color: white;
+}
+
+.green {
+  background-color: #c2e8c9;
+}
+
+.green button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.orange {
+  background-color: #f9d7b0;
+}
+
+.orange button {
+  background-color: #ff9800;
+  color: white;
+}
+
+.pink {
+  background-color: #f8c8d8;
+}
+
+.pink button {
+  background-color: #e91e63;
+  color: white;
+}
+
+.sentence-box {
+  font-size: 1.4rem;
+  margin-top: 20px;
+}
+
+#resetBtn {
+  margin-top: 15px;
+  background-color: #555;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#resetBtn:hover {
+  background-color: #333;
+}
+#speakBtn {
+  margin-left: 10px;
+  background-color: #007acc;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+#speakBtn:disabled {
+  background-color: #a0cfff;
+  cursor: not-allowed;
+}
+
+#speakBtn:hover:not(:disabled) {
+  background-color: #005fa3;
+}
+
