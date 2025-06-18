@@ -60,7 +60,7 @@ speakBtn.addEventListener('click', () => {
     const utterance = new SpeechSynthesisUtterance(sentenceEl.textContent);
     window.speechSynthesis.speak(utterance);
   } else {
-    alert("Sorry, your browser doesn't support speech synthesis.");
+    alert('Speech synthesis is not supported in this browser.');
   }
 });
 
